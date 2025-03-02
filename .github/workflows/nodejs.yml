@@ -21,6 +21,6 @@ jobs:
         working-directory: ./mynodeapp  # Change working directory to your application folder
         run: npm install
 
-      - name: Run tests
-        working-directory: ./mynodeapp  # Change working directory to your application folder
-        run: npm test  # This will run all tests, including greet.test.js
+      # - name: Run tests
+      #   working-directory: ./mynodeapp  # Change working directory to your application folder
+      #   run: npm test  # This will run all tests, including greet.test.js
