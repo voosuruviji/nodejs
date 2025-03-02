@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+// Imports
 import chalk from "chalk"; // Use `import` instead of `require`
 import fs from "fs";
 import path from "path";
