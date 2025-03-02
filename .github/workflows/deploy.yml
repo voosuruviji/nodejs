@@ -1,0 +1,29 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.node_instance }}" > private_key.pem
+          chmod 600 private_key.pem
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@54.209.140.29 << 'EOF'
+            cd ~/random-quote-api || git clone https://github.com/voosuruviji/nodejs.git && cd random-quote-api
+            git pull origin main
+            npm install
+            pm2 restart server.js || pm2 start server.js --name random-quote-api
+            pm2 save
+          EOF
