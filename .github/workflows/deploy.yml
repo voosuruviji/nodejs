@@ -15,12 +15,12 @@ jobs:
 
       - name: Setup SSH Key
         run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" > private_key.pem
+          echo "${{ secrets.EC2_SSH_KEY }}" > worker.pem
           chmod 600 private_key.pem
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@18.232.166.167 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i worker.pem ubuntu@18.232.166.167 << 'EOF'
             cd ~/random-quote-api || git clone https://github.com/voosuruviji/nodejs.git && cd random-quote-api
             git pull origin main
             npm install
